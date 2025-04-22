@@ -1,0 +1,17 @@
+spring:
+  graphql:
+    graphiql:
+      enabled: true
+      path: /graphiql
+      allowed-origins: "http://localhost:4200,http://localhost:8080"
+    schema:
+      printer:
+        enabled: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+  cors:
+    allowed-origins: "http://localhost:4200,http://localhost:8080"
+    allowed-methods: "*"
+    allowed-headers: "*"
+    allow-credentials: true 

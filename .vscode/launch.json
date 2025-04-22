@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-GestorApplication<gestor>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.arelance.gestor.GestorApplication",
+            "projectName": "gestor",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

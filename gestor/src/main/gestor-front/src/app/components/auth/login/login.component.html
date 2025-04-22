@@ -1,0 +1,62 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1>Bienvenido</h1>
+      <p class="auth-subtitle">Inicia sesión para continuar</p>
+    </div>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="auth-form">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <div class="input-group">
+          <i class="fas fa-envelope input-icon"></i>
+          <input 
+            type="email" 
+            id="email" 
+            formControlName="email"
+            [class.error]="emailControl?.invalid && emailControl?.touched"
+            placeholder="Ingrese su email">
+        </div>
+        <div class="error-message" *ngIf="emailControl?.errors?.['required'] && emailControl?.touched">
+          El email es requerido
+        </div>
+        <div class="error-message" *ngIf="emailControl?.errors?.['email'] && emailControl?.touched">
+          El email no es válido
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <div class="input-group">
+          <i class="fas fa-lock input-icon"></i>
+          <input 
+            type="password" 
+            id="password" 
+            formControlName="password"
+            [class.error]="passwordControl?.invalid && passwordControl?.touched"
+            placeholder="Ingrese su contraseña">
+        </div>
+        <div class="error-message" *ngIf="passwordControl?.errors?.['required'] && passwordControl?.touched">
+          La contraseña es requerida
+        </div>
+        <div class="error-message" *ngIf="passwordControl?.errors?.['minlength'] && passwordControl?.touched">
+          La contraseña debe tener al menos 6 caracteres
+        </div>
+      </div>
+
+      <button 
+        type="submit" 
+        class="submit-button"
+        [disabled]="loginForm.invalid || isLoading">
+        <span class="button-content">
+          <i class="fas fa-spinner fa-spin" *ngIf="isLoading"></i>
+          <span>{{ isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión' }}</span>
+        </span>
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      <p>¿No tienes una cuenta? <a routerLink="/register">Regístrate</a></p>
+    </div>
+  </div>
+</div>

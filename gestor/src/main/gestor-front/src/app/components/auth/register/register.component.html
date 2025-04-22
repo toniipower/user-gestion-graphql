@@ -1,0 +1,107 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1>Crear Cuenta</h1>
+      <p class="auth-subtitle">Regístrate para comenzar</p>
+    </div>
+    
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="auth-form">
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <div class="input-group">
+          <i class="fas fa-user input-icon"></i>
+          <input 
+            type="text" 
+            id="name"
+            formControlName="name"
+            [class.error]="nameControl?.invalid && nameControl?.touched"
+            placeholder="Ingrese su nombre">
+        </div>
+        <div class="error-message" *ngIf="nameControl?.invalid && nameControl?.touched">
+          <span *ngIf="nameControl?.errors?.['required']">El nombre es requerido</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastname">Apellido</label>
+        <div class="input-group">
+          <i class="fas fa-user input-icon"></i>
+          <input 
+            type="text" 
+            id="lastname"
+            formControlName="lastname"
+            placeholder="Ingrese su apellido (opcional)">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dni">DNI</label>
+        <div class="input-group">
+          <i class="fas fa-id-card input-icon"></i>
+          <input 
+            type="text" 
+            id="dni"
+            formControlName="dni"
+            [class.error]="dniControl?.invalid && dniControl?.touched"
+            placeholder="Ingrese su DNI">
+        </div>
+        <div class="error-message" *ngIf="dniControl?.invalid && dniControl?.touched">
+          <span *ngIf="dniControl?.errors?.['required']">El DNI es requerido</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <div class="input-group">
+          <i class="fas fa-envelope input-icon"></i>
+          <input 
+            type="email" 
+            id="email"
+            formControlName="email"
+            [class.error]="emailControl?.invalid && emailControl?.touched"
+            placeholder="Ingrese su email">
+        </div>
+        <div class="error-message" *ngIf="emailControl?.invalid && emailControl?.touched">
+          <span *ngIf="emailControl?.errors?.['required']">El email es requerido</span>
+          <span *ngIf="emailControl?.errors?.['email']">Ingrese un email válido</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <div class="input-group">
+          <i class="fas fa-lock input-icon"></i>
+          <input 
+            type="password" 
+            id="password"
+            formControlName="password"
+            [class.error]="passwordControl?.invalid && passwordControl?.touched"
+            placeholder="Ingrese su contraseña">
+        </div>
+        <div class="error-message" *ngIf="passwordControl?.invalid && passwordControl?.touched">
+          <span *ngIf="passwordControl?.errors?.['required']">La contraseña es requerida</span>
+          <span *ngIf="passwordControl?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres</span>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button 
+        type="submit" 
+        class="submit-button"
+        [disabled]="isLoading || !registerForm.valid">
+        <span class="button-content">
+          <i class="fas fa-spinner fa-spin" *ngIf="isLoading"></i>
+          <span>{{ isLoading ? 'Registrando...' : 'Registrarse' }}</span>
+        </span>
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      <p>¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión aquí</a></p>
+    </div>
+  </div>
+</div>
+

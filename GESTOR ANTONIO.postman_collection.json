@@ -1,0 +1,357 @@
+{
+	"info": {
+		"_postman_id": "2d99ba11-12c4-486f-90c4-b96de61cbb45",
+		"name": "GESTOR ANTONIO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32730694"
+	},
+	"item": [
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "getAllEmployee",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsIm5iZiI6MTc0MzQzMTY2NCwiaXNzIjoiQXJlbGFuY2VHZXN0b3JFbXBsZWFkb3MiLCJleHAiOjE3NDM0Mzg4NjQsImlhdCI6MTc0MzQzMTY2NCwiYXV0aG9yaXRpZXMiOiJST0xFX0FETUlOIiwianRpIjoiYTNlNTc1ZjAtYTNjOC00ZTllLTliYzgtZjVhNDBiYzMzZDg5In0.IFlTTGYKS5w_aZGwdKVNZyGX-2kllB0ogd8NBQMUSN0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createEmployee",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsIm5iZiI6MTc0MzQzMTY2NCwiaXNzIjoiQXJlbGFuY2VHZXN0b3JFbXBsZWFkb3MiLCJleHAiOjE3NDM0Mzg4NjQsImlhdCI6MTc0MzQzMTY2NCwiYXV0aG9yaXRpZXMiOiJST0xFX0FETUlOIiwianRpIjoiYTNlNTc1ZjAtYTNjOC00ZTllLTliYzgtZjVhNDBiYzMzZDg5In0.IFlTTGYKS5w_aZGwdKVNZyGX-2kllB0ogd8NBQMUSN0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Test2\",\r\n  \"lastname\": \"Pérez\",\r\n  \"dni\": \"12t456AA\",\r\n  \"email\": \"Tes2t@example.com\",\r\n  \"address\": \"Calle Principal 123\",\r\n  \"password\": \"123456\",\r\n  \"role\": {\r\n    \"id\": 1,\r\n    \"erole\": null\r\n  },\r\n  \"departments\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/employees/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"employees",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteEmployee",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/employees/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"employees",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateEmployee",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Test Actualizado\", \r\n  \"lastname\": \"Pérez Modificado\", \r\n  \"dni\": \"123456AA\", \r\n  \"email\": \"test.actualizado@example.com\", \r\n  \"address\": \"Nueva Dirección 456\", \r\n  \"password\": \"123456\", \r\n  \"role\": {\r\n    \"id\": 1\r\n  }, \r\n  \"departments\": [\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/employees/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"employees",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Departments",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/departments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"departments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createDepartments",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Recursos Humanos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/departments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"departments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/departments/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"departments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateDepartament",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Marketing\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/departments/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"departments",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDepartment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/departments/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"departments",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login_Register",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjJAZXhhbXBsZS5jb20iLCJuYmYiOjE3NDM0MzIyNjQsImlzcyI6IkFyZWxhbmNlR2VzdG9yRW1wbGVhZG9zIiwiZXhwIjoxNzQzNDM5NDY0LCJpYXQiOjE3NDM0MzIyNjQsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiIsImp0aSI6ImFiYjYxODcwLTY0YzctNDBlZS1hZWQyLTczOTkxYWQ3MDdmNyJ9.5FLBsQoWG7NCdG2R4oxd3dfSEwp0yfCDWm15GJZAmtA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"consultant@example.com\",\r\n  \"password\": \"cons\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Admin\",\r\n  \"lastname\": \"Dev\",\r\n  \"dni\": \"12345678Z\",\r\n  \"email\": \"admin@example.com\",\r\n  \"password\": \"admin\",\r\n  \"rol\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

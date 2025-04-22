@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p",
+		"name": "Gestor GraphQL",
+		"description": "Colección de endpoints para el gestor con GraphQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Autenticación",
+			"item": [
+				{
+					"name": "Registro",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Admin\",\n  \"lastname\": \"Dev\",\n  \"dni\": \"12345678Z\",\n  \"email\": \"admin@example.com\",\n  \"password\": \"admin\",\n  \"rol\": \"ADMIN\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "auth", "register"]
+						}
+					}
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "auth", "login"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "GraphQL Queries",
+			"item": [
+				{
+					"name": "Obtener todos los empleados",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"query { employees { id name lastname dni email role { id erole } department { id name } } }\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/graphql",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["graphql"]
+						}
+					}
+				},
+				{
+					"name": "Obtener empleado por ID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"query { employee(id: 1) { id name lastname dni email role { id erole } department { id name } } }\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/graphql",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["graphql"]
+						}
+					}
+				},
+				{
+					"name": "Actualizar empleado",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"mutation { updateEmployee(id: 1, employee: { name: \\\"Juan\\\", lastname: \\\"Pérez\\\", dni: \\\"12345678A\\\", email: \\\"juan@ejemplo.com\\\", password: \\\"123456\\\", roleId: 1, departmentId: 1 }) { id name lastname email } }\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/graphql",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["graphql"]
+						}
+					}
+				},
+				{
+					"name": "Eliminar empleado",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": \"mutation { deleteEmployee(id: 1) }\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/graphql",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["graphql"]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "tu_token_jwt",
+			"type": "string"
+		}
+	]
+} 

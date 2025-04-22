@@ -1,0 +1,117 @@
+<div class="employee-new-container">
+  <app-navbar></app-navbar>
+
+  <div class="content-wrapper">
+    <div class="form-card">
+      <h1>Nuevo Empleado</h1>
+
+      <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input 
+              type="text" 
+              id="name" 
+              formControlName="name"
+              [class.error]="employeeForm.get('name')?.invalid && employeeForm.get('name')?.touched"
+              placeholder="Ingrese el nombre">
+            <span class="error-message" *ngIf="employeeForm.get('name')?.errors?.['required'] && employeeForm.get('name')?.touched">
+              El nombre es requerido
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="lastname">Apellido</label>
+            <input 
+              type="text" 
+              id="lastname" 
+              formControlName="lastname"
+              placeholder="Ingrese el apellido (opcional)">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              formControlName="email"
+              [class.error]="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched"
+              placeholder="Ingrese el email">
+            <span class="error-message" *ngIf="employeeForm.get('email')?.errors?.['required'] && employeeForm.get('email')?.touched">
+              El email es requerido
+            </span>
+            <span class="error-message" *ngIf="employeeForm.get('email')?.errors?.['email'] && employeeForm.get('email')?.touched">
+              El email no es válido
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input 
+              type="password" 
+              id="password" 
+              formControlName="password"
+              [class.error]="employeeForm.get('password')?.invalid && employeeForm.get('password')?.touched"
+              placeholder="Ingrese la contraseña">
+            <span class="error-message" *ngIf="employeeForm.get('password')?.errors?.['required'] && employeeForm.get('password')?.touched">
+              La contraseña es requerida
+            </span>
+            <span class="error-message" *ngIf="employeeForm.get('password')?.errors?.['minlength'] && employeeForm.get('password')?.touched">
+              La contraseña debe tener al menos 6 caracteres
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="dni">DNI</label>
+            <input 
+              type="text" 
+              id="dni" 
+              formControlName="dni"
+              [class.error]="employeeForm.get('dni')?.invalid && employeeForm.get('dni')?.touched"
+              placeholder="Ingrese el DNI">
+            <span class="error-message" *ngIf="employeeForm.get('dni')?.errors?.['required'] && employeeForm.get('dni')?.touched">
+              El DNI es requerido
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Dirección</label>
+            <input 
+              type="text" 
+              id="address" 
+              formControlName="address"
+              placeholder="Ingrese la dirección (opcional)">
+          </div>
+
+          <div class="form-group">
+            <label for="department">Departamento</label>
+            <select id="department" formControlName="department">
+              <option [ngValue]="null">Seleccione un departamento (opcional)</option>
+              <option *ngFor="let dept of departments" [ngValue]="dept.id">
+                {{ dept.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button 
+            type="button" 
+            class="cancel-button"
+            (click)="onCancel()">
+            Cancelar
+          </button>
+          <button 
+            type="submit" 
+            class="submit-button"
+            [disabled]="employeeForm.invalid || isLoading">
+            <span *ngIf="isLoading" class="spinner">
+              <i class="fas fa-circle-notch fa-spin"></i>
+            </span>
+            <span>{{ isLoading ? 'Creando...' : 'Crear Empleado' }}</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> 

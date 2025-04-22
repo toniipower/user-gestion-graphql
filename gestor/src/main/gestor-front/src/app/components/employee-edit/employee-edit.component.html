@@ -1,0 +1,100 @@
+<div class="container mt-4">
+  <app-navbar></app-navbar>
+
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-body">
+          <h2 class="text-center mb-4">Editar Empleado</h2>
+
+          <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="name" class="form-label">Nombre</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="name" 
+                formControlName="name"
+                [class.is-invalid]="employeeForm.get('name')?.invalid && employeeForm.get('name')?.touched"
+                placeholder="Ingrese el nombre">
+              <div class="invalid-feedback" *ngIf="employeeForm.get('name')?.errors?.['required'] && employeeForm.get('name')?.touched">
+                El nombre es requerido
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="lastname" class="form-label">Apellido</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="lastname" 
+                formControlName="lastname"
+                placeholder="Ingrese el apellido (opcional)">
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input 
+                type="email" 
+                class="form-control" 
+                id="email" 
+                formControlName="email"
+                [class.is-invalid]="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched"
+                placeholder="Ingrese el email">
+              <div class="invalid-feedback" *ngIf="employeeForm.get('email')?.errors?.['required'] && employeeForm.get('email')?.touched">
+                El email es requerido
+              </div>
+              <div class="invalid-feedback" *ngIf="employeeForm.get('email')?.errors?.['email'] && employeeForm.get('email')?.touched">
+                El email no es válido
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="dni" class="form-label">DNI</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="dni" 
+                formControlName="dni"
+                [class.is-invalid]="employeeForm.get('dni')?.invalid && employeeForm.get('dni')?.touched"
+                placeholder="Ingrese el DNI">
+              <div class="invalid-feedback" *ngIf="employeeForm.get('dni')?.errors?.['required'] && employeeForm.get('dni')?.touched">
+                El DNI es requerido
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="address" class="form-label">Dirección</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="address" 
+                formControlName="address"
+                placeholder="Ingrese la dirección (opcional)">
+            </div>
+
+            <div class="mb-3">
+              <label for="department" class="form-label">Departamento</label>
+              <select class="form-select" id="department" formControlName="department">
+                <option [ngValue]="null">Seleccione un departamento (opcional)</option>
+                <option *ngFor="let dept of departments" [ngValue]="dept.id">
+                  {{ dept.name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button 
+                type="submit" 
+                class="btn btn-primary" 
+                [disabled]="employeeForm.invalid || isLoading">
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                {{ isLoading ? 'Guardando...' : 'Guardar Cambios' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

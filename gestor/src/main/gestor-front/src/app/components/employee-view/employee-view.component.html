@@ -1,0 +1,71 @@
+<div class="employee-container">
+  <app-navbar></app-navbar>
+
+  <div class="content-wrapper">
+    <div class="header-section">
+      <h1>Empleados</h1>
+      <button *ngIf="isAdmin()" class="add-button" (click)="addEmployee()">
+        <i class="fas fa-plus"></i>
+        <span>Añadir Empleado</span>
+      </button>
+    </div>
+
+    <div class="table-container">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>Email</th>
+              <th>DNI</th>
+              <th>Dirección</th>
+              <th>Rol</th>
+              <th *ngIf="isAdmin()">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let employee of employees">
+              <td>{{ employee.id }}</td>
+              <td>{{ employee.name }}</td>
+              <td>{{ employee.lastname }}</td>
+              <td>{{ employee.email }}</td>
+              <td>{{ employee.dni }}</td>
+              <td>{{ employee.address }}</td>
+              <td>
+                <span class="role-badge">{{ employee.role?.erole }}</span>
+              </td>
+              <td *ngIf="isAdmin()" class="actions-cell">
+                <div class="action-buttons">
+                  <button class="edit-button" (click)="editEmployee(employee)">
+                    <i class="fas fa-edit"></i>
+                    <span>Editar</span>
+                  </button>
+                  <button class="delete-button" (click)="deleteEmployee(employee.id)">
+                    <i class="fas fa-trash"></i>
+                    <span>Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Estado de carga -->
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="spinner">
+        <i class="fas fa-circle-notch fa-spin"></i>
+      </div>
+      <span>Cargando empleados...</span>
+    </div>
+
+    <!-- Mensaje de error -->
+    <div *ngIf="errorMessage" class="error-message">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>{{ errorMessage }}</span>
+    </div>
+  </div>
+</div>
