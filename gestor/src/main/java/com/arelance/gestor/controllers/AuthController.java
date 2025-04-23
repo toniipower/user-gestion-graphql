@@ -6,7 +6,7 @@ import com.arelance.gestor.dto.LoginRequest;
 import com.arelance.gestor.dto.RegisterRequest;
 import com.arelance.gestor.entities.Employee;
 import com.arelance.gestor.repositories.EmployeeRepository;
-import com.arelance.gestor.repositories.RoleRespository;
+import com.arelance.gestor.repositories.RoleRepository ;
 import com.arelance.gestor.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,7 +41,7 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private RoleRespository rolRepository;
+    private RoleRepository  rolRepository;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) throws AuthenticationException {

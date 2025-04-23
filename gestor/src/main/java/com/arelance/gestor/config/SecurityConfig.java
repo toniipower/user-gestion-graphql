@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/graphiql").permitAll()
                 .antMatchers("/graphql").permitAll()
-                .antMatchers("/api/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/api/**").hasAnyRole("ADMIN", "CONSULTANT")
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(graphQLSecurityFilter, UsernamePasswordAuthenticationFilter.class);

@@ -1,21 +1,40 @@
 package com.arelance.gestor.controllers;
 
 import com.arelance.gestor.dto.EmployeeInput;
+import com.arelance.gestor.entities.Department;
 import com.arelance.gestor.entities.Employee;
+import com.arelance.gestor.entities.Role;
+import com.arelance.gestor.repositories.DepartmentRepository;
+import com.arelance.gestor.repositories.RoleRepository;
 import com.arelance.gestor.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class EmployeeGraphQLController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    private final DepartmentRepository departmentRepository;
+    private final RoleRepository roleRepository;
+
+    public EmployeeGraphQLController(RoleRepository roleRepository, DepartmentRepository departmentRepository) {
+        this.roleRepository = roleRepository;
+        this.departmentRepository = departmentRepository;
+
+    }
 
     @QueryMapping
     public List<Employee> employees() {
@@ -34,7 +53,24 @@ public class EmployeeGraphQLController {
         employee.setLastname(input.getLastname());
         employee.setDni(input.getDni());
         employee.setEmail(input.getEmail());
+        // employee.setPassword(input.getPassword());
+        String encryptedPassword = passwordEncoder.encode(input.getPassword());
+        employee.setPassword(encryptedPassword);
         // Aquí deberías manejar el password y las relaciones con role y department
+        Role role = roleRepository.findById(input.getRoleId())
+                .orElseThrow(() -> new RuntimeException("Role no encontrado"));
+        employee.setRole(role);
+
+        if (input.getDepartmentId() != null) {
+            Department department = departmentRepository.findById(input.getDepartmentId())
+                    .orElseThrow(() -> new RuntimeException("Departamento no encontrado"));
+            
+            // Creamos un Set con el único departamento y lo asignamos
+            Set<Department> departments = new HashSet<>();
+            departments.add(department);
+            employee.setDepartments(departments);
+        }
+
         return employeeService.create(employee);
     }
 
@@ -54,4 +90,4 @@ public class EmployeeGraphQLController {
         employeeService.delete(id);
         return true;
     }
-} 
+}

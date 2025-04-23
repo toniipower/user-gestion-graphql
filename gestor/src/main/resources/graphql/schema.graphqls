@@ -21,7 +21,7 @@ type Employee {
     dni: String!
     email: String!
     role: Role
-    department: Department
+    department: [Department]
 }
 
 type Department {

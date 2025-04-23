@@ -28,9 +28,10 @@ export class EmployeeNewComponent implements OnInit {
       name: ['', Validators.required],
       lastname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       dni: ['', Validators.required],
-      role: ['', Validators.required],
-      department: ['', Validators.required]
+      address: [''],
+      department: [null]
     });
   }
 
@@ -58,9 +59,10 @@ export class EmployeeNewComponent implements OnInit {
         lastname: formValue.lastname,
         email: formValue.email,
         dni: formValue.dni,
-        role: formValue.role,
-        department: formValue.department
+        role: { id: 2, erole: 'CONSULTANT' }, // Por defecto, nuevo empleado es CONSULTANT
+        department: this.departments.find(d => d.id === formValue.department) || null
       };
+      console.log('Formulario válido, enviando datos:', employeeData);
 
       this.employeeService.createEmployee(employeeData).subscribe({
         next: () => {

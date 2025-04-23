@@ -71,6 +71,8 @@ const UPDATE_EMPLOYEE = gql`
       name
       lastname
       email
+      dni
+      address
       role {
         id
         erole
@@ -139,11 +141,36 @@ export class EmployeeService {
   }
 
   createEmployee(employee: Omit<Employee, 'id'>): Observable<Employee> {
+    console.log('Creating employee with data:', employee);
+    console.log('Payload GraphQL:', {
+      name: employee.name,
+      lastname: employee.lastname,
+      dni: employee.dni,
+      email: employee.email,
+      password: '123456',
+      roleId: employee.role.id,
+      departmentId: employee.department?.id || null
+    });
     return this.apollo.mutate<{ createEmployee: Employee }>({
       mutation: CREATE_EMPLOYEE,
-      variables: { employee }
+      variables: {
+        employee: {
+          name: employee.name,
+          lastname: employee.lastname,
+          dni: employee.dni,
+          email: employee.email,
+          password: '123456', // Contraseña por defecto
+          roleId: employee.role.id,
+          departmentId: employee.department?.id || null
+        }
+      }
     }).pipe(
-      map(result => result.data!.createEmployee),
+      map(result => {
+        if (!result.data) {
+          throw new Error('No data received from server');
+        }
+        return result.data.createEmployee;
+      }),
       catchError(error => {
         console.error('Error creating employee:', error);
         throw error;

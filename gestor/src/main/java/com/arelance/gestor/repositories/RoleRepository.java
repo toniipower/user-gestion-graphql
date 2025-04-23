@@ -9,7 +9,7 @@ import com.arelance.gestor.entities.Role;
 import java.util.Optional;
 
 @Repository
-public interface RoleRespository extends JpaRepository<Role, Long> {
+public interface RoleRepository  extends JpaRepository<Role, Long> {
     Optional<Role> findByErole(Erole erole);
     boolean existsByErole(Erole erole);
     
