@@ -1,0 +1,24 @@
+<nav class="main-nav">
+  <div class="nav-container">
+    <a class="nav-logo" href="#">Gestión de Empleados</a>
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation" (click)="toggleMenu()">
+      <span class="nav-toggle-icon"></span>
+    </button>
+    <div class="nav-menu" [class.active]="isMenuOpen">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/employees" routerLinkActive="active">Empleados</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/departments" routerLinkActive="active">Departamentos</a>
+        </li>
+      </ul>
+      <div class="nav-actions">
+        <button class="logout-button" (click)="logout()">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Cerrar Sesión</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav> 
