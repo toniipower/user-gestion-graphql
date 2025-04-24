@@ -48,7 +48,7 @@ public class EmployeeService {
 
     public Optional<Employee> findById(Long id) { //Optional<Employee> => para avisar de que puede ser nulo o no encontrar nada
         return Optional.ofNullable(employeeRepository.findById(id)
-                .orElseThrow(() -> new EmployeeNotFoundException(id))); // usando la excepcion personalizada
+                .orElseThrow(() -> new EmployeeNotFoundException(id)));
     }
 
 

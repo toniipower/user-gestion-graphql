@@ -65,7 +65,6 @@ public class EmployeeGraphQLController {
             Department department = departmentRepository.findById(input.getDepartmentId())
                     .orElseThrow(() -> new RuntimeException("Departamento no encontrado"));
             
-            // Creamos un Set con el único departamento y lo asignamos
             Set<Department> departments = new HashSet<>();
             departments.add(department);
             employee.setDepartments(departments);
@@ -81,7 +80,6 @@ public class EmployeeGraphQLController {
         employee.setLastname(input.getLastname());
         employee.setDni(input.getDni());
         employee.setEmail(input.getEmail());
-        // Aquí deberías manejar el password y las relaciones con role y department
         return employeeService.update(employee, id);
     }
 
