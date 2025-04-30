@@ -1,0 +1,10 @@
+{
+  "/": {
+    "target": "http://localhost:4200",
+    "secure": false,
+    "headers": {
+      "Content-Security-Policy": "default-src 'self';"
+    }
+  }
+}
+  

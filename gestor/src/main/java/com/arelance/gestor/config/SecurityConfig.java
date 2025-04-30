@@ -5,6 +5,7 @@ import com.arelance.gestor.utils.GraphQLSecurityFilter;
 import com.arelance.gestor.utils.JwtTokenFilter;
 import com.arelance.gestor.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -33,6 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private EmployeeDetailsServiceImpl employeeDetailsService;
 
     @Autowired
+    private HeadersFilters headersFilters;
+
+    @Autowired
     private JwtUtils jwtUtils;
 
     @Autowired
@@ -52,12 +56,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/", "/index.html", "/**/*.js", "/**/*.css", "/assets/**").permitAll()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/graphiql").permitAll()
                 .antMatchers("/graphql").permitAll()
                 .antMatchers("/api/**").hasAnyRole("ADMIN", "CONSULTANT")
                 .anyRequest().authenticated()
                 .and()
+                .addFilterBefore(headersFilters, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(graphQLSecurityFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
@@ -68,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
-        
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
@@ -83,5 +89,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    FilterRegistrationBean<HeadersFilters> HeadersFiltersRegistration() {
+        FilterRegistrationBean<HeadersFilters> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(headersFilters);
+        registrationBean.addUrlPatterns("/api/*", "/**", "/static/**", "/public/**",
+                "/resources/**",
+                "/META-INF/resources/**", "/graphql", "/login");
+        registrationBean.setOrder(1);
+        return registrationBean;
     }
 }
