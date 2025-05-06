@@ -16,7 +16,8 @@ const CREATE_DEPARTMENT = gql`
 
 @Component({
   selector: 'app-department-new',
-  templateUrl: './department-new.component.html'
+  templateUrl: './department-new.component.html',
+  styleUrls: ['./department-new.component.css']
 })
 export class DepartmentNewComponent {
   department: Department = {
