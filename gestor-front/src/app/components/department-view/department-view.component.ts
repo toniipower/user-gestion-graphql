@@ -46,7 +46,7 @@ export class DepartmentViewComponent implements OnInit {
   }
 
   addDepartment(): void {
-    this.router.navigate(['/department/new']);
+    this.router.navigate(['/departments/new']);
   }
 
   editDepartment(department: Department): void {
