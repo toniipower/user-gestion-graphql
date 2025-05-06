@@ -4,7 +4,12 @@
       <h1>Bienvenido</h1>
       <p class="auth-subtitle">Inicia sesión para continuar</p>
     </div>
-    
+
+    <!-- 🔴 Mensaje de error general para pruebas E2E -->
+    <div *ngIf="errorMessage" class="error-message" data-cy="login-error">
+      {{ errorMessage }}
+    </div>
+
     <form [formGroup]="loginForm" (ngSubmit)="login()" class="auth-form">
       <div class="form-group">
         <label for="email">Email</label>
