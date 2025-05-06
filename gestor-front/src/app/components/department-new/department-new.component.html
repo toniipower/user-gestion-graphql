@@ -1,23 +1,38 @@
-<div class="container mt-4">
-  <h2>Crear Nuevo Departamento</h2>
-  <form (ngSubmit)="onSubmit()" #departmentForm="ngForm">
-    <div class="form-group">
-      <label for="name">Nombre del Departamento</label>
-      <input 
-        type="text" 
-        class="form-control" 
-        id="name" 
-        name="name" 
-        [(ngModel)]="department.name" 
-        required>
+<div class="department-new-container">
+  <app-navbar></app-navbar>
+
+  <div class="content-wrapper">
+    <div class="form-card">
+      <h1>Crear Nuevo Departamento</h1>
+
+      <form (ngSubmit)="onSubmit()" #departmentForm="ngForm">
+        <div class="form-group">
+          <label for="name">Nombre del Departamento</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="name" 
+            name="name" 
+            [(ngModel)]="department.name" 
+            required
+            placeholder="Ingrese el nombre del departamento">
+          <div class="error-message" *ngIf="departmentForm.submitted && !department.name">
+            El nombre del departamento es requerido
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="cancel-button" (click)="router.navigate(['/departments'])">
+            Cancelar
+          </button>
+          <button 
+            type="submit" 
+            class="submit-button"
+            [disabled]="!departmentForm.form.valid">
+            Crear Departamento
+          </button>
+        </div>
+      </form>
     </div>
-    <div class="mt-3">
-      <button type="submit" class="btn btn-primary" [disabled]="!departmentForm.form.valid">
-        Crear Departamento
-      </button>
-      <button type="button" class="btn btn-secondary ms-2" (click)="router.navigate(['/departments'])">
-        Cancelar
-      </button>
-    </div>
-  </form>
+  </div>
 </div> 
